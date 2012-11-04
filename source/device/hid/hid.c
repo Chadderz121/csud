@@ -99,7 +99,7 @@ void BitSet(void* buffer, u32 offset, u32 length, u32 value) {
 			mask = (1 << ((offset % 8) + length)) - (1 << (offset % 8));		
 			bitBuffer[i] = (bitBuffer[i] & ~mask) |
 				((value << (offset % 8)) & mask);
-		} if (i == offset / 8) {
+		} else if (i == offset / 8) {
 			mask = 0x100 - (1 << (offset % 8));		
 			bitBuffer[i] = (bitBuffer[i] & ~mask) |
 				((value << (offset % 8)) & mask);
