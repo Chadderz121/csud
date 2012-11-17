@@ -13,3 +13,11 @@ OBJECTS += $(BUILD)keyboard.c.o
 $(BUILD)keyboard.c.o: $(DIR)keyboard.c $(INCDIR)device/hid/hid.h $(INCDIR)device/hid/keyboard.h $(INCDIR)device/hid/report.h $(INCDIR)platform/platform.h $(INCDIR)usbd/device.h $(INCDIR)types.h $(INCDIR)usbd/usbd.h
 	$(GCC) $< -o $@
 endif
+
+ifeq ("$(LIB_MOUSE)", "1")
+CFLAGS += -DLIB_MOUSE
+OBJECTS += $(BUILD)mouse.c.o
+
+$(BUILD)mouse.c.o: $(DIR)mouse.c $(INCDIR)device/hid/hid.h $(INCDIR)device/hid/mouse.h $(INCDIR)device/hid/report.h $(INCDIR)platform/platform.h $(INCDIR)usbd/device.h $(INCDIR)types.h $(INCDIR)usbd/usbd.h
+	$(GCC) $< -o $@
+endif
