@@ -103,7 +103,7 @@ u32 MouseGetPosition(u32 mouseAddress);
 	First bit : Left button
 	Second bit: Right button
 	Third bit : Middle button
-	Fourth bit: Center button
+	Fourth bit: Side button
 	Fifth bit : Extra button
 */
 u8 MouseGetButtons(u32 mouseAddress);
