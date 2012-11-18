@@ -1,7 +1,7 @@
 CSUD - Chadderz's Simple USB Driver 
 	by Alex Chadwick
 
-A USB driver originally written for the raspberry pi (which uses a DesignWare® 
+A USB driver originally written for the raspberry pi (which uses a DesignWareï¿½ 
 Hi-Speed USB 2.0 On-The-Go (HS OTG) Controller), to be integrated into any
 operating system with appropriate wrappers.
 
@@ -36,6 +36,10 @@ CSUD is broken down into a few drivers:
 			Built on top of the hid driver, as USB keyboards are a specific
 			subset of hid devices. Does not have interrupt transfers, limiting
 			support severely (6/12 keyboards tested functioned correctly).
+	* Mouse driver - Driver supporting communication with mice. By Steve White.
+			Built on top of the hid driver, as USB mice are a specific subset
+			of hid devices. Does not have interrupt transfers, unknown how well
+			supported it is.
 
 At present, only USB control transfers are supported by the hcd and usbd, which
 is very limiting. Supporting interrupt transfers would be a major benefit, as 
