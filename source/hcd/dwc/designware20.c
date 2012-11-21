@@ -5,7 +5,7 @@
 *	A light weight implementation of the USB protocol stack fit for a simple
 *	driver.
 *
-*	hcd/dwc/designware20.c contains code to control the DesignWare® Hi-Speed
+*	hcd/dwc/designware20.c contains code to control the DesignWareï¿½ Hi-Speed
 *	USB 2.0 On-The-Go (HS OTG) Controller.
 *
 *	THIS SOFTWARE IS NOT AFFILIATED WITH NOR ENDORSED BY SYNOPSYS IP.
@@ -585,7 +585,7 @@ Result HcdInitialise() {
 
 	if (sizeof(struct CoreGlobalRegs) != 0x400 || sizeof(struct HostGlobalRegs) != 0x400 || sizeof(struct PowerReg) != 0x4) {
 		LOGF("HCD: Incorrectly compiled driver. HostGlobalRegs: %#x (0x400), CoreGlobalRegs: %#x (0x400), PowerReg: %#x (0x4).\n", 
-			sizeof(struct HostGlobalRegs), sizeof(struct CoreGlobalRegs));
+			sizeof(struct HostGlobalRegs), sizeof(struct CoreGlobalRegs), sizeof(struct PowerReg));
 		return ErrorCompiler; // Correct packing settings are required.
 	}
 	LOG_DEBUG("HCD: Reserving memory.\n");
