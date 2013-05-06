@@ -26,7 +26,7 @@ LIBNAME ?= libcsud.a
 INCDIR ?= include/
 
 all:
-	@echo CUSD - Chadderz's Simple USB Driver
+	@echo CUSD - Chadderz Simple USB Driver
 	@echo 	by Alex Chadwick
 	@echo Usage: make driver CONFIG=config TYPE=type TARGET=target GNU=gnu
 	@echo Parameters:
