@@ -26,22 +26,22 @@ LIBNAME ?= libcsud.a
 INCDIR ?= include/
 
 all:
-	@echo CUSD - Chadderz Simple USB Driver
-	@echo 	by Alex Chadwick
-	@echo Usage: make driver CONFIG=config TYPE=type TARGET=target GNU=gnu
-	@echo Parameters:
-	@echo  config - DEBUG or FINAL (default) 
-	@echo           alters amount of messages, checks, and the speed.
-	@echo  type   - STANDALONE, LOWLEVEL (default), or DRIVER
-	@echo           alters how complete the driver is STANDALONE for no external
-	@echo           dependencies LOWLEVEL for only key dependencies, DRIVER for 
-	@echo           typical levels.
-	@echo  target - RPI, NONE (default)
-	@echo           alters the target system. NONE for dummy driver, RPI for 
-	@echo           the RaspberryPi
-	@echo  gnu    - A gnu compiler prefix (arm-none-eabi-) or empty (default).
-	@echo           The compiler chain to use (for cross compiling).
-	@echo See arguments for more.
+	@echo "CUSD - Chadderz Simple USB Driver"
+	@echo "	by Alex Chadwick"
+	@echo "Usage: make driver CONFIG=config TYPE=type TARGET=target GNU=gnu"
+	@echo "Parameters:"
+	@echo " config - DEBUG or FINAL (default)"
+	@echo "          alters amount of messages, checks, and the speed."
+	@echo " type   - STANDALONE, LOWLEVEL (default), or DRIVER"
+	@echo "          alters how complete the driver is STANDALONE for no external"
+	@echo "          dependencies LOWLEVEL for only key dependencies, DRIVER for" 
+	@echo "          typical levels."
+	@echo " target - RPI, NONE (default)"
+	@echo "          alters the target system. NONE for dummy driver, RPI for" 
+	@echo "          the RaspberryPi"
+	@echo " gnu    - A gnu compiler prefix (arm-none-eabi-) or empty (default)."
+	@echo "          The compiler chain to use (for cross compiling)."
+	@echo "See arguments for more."
 
 # The flags to pass to GCC for compiling.
 # -std=c99: Use c99 standard.
