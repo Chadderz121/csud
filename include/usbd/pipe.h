@@ -35,6 +35,6 @@ struct UsbPipeAddress {
 	UsbTransfer Type : 2; // @16
 	UsbDirection Direction : 1; // @18
 	unsigned _reserved19_31 : 13; // @19
-};
+} __attribute__ ((__packed__));
 
 #endif // _USBD_PIPE_H

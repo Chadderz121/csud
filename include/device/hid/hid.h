@@ -62,8 +62,8 @@ struct HidDescriptor {
 	struct {
 		enum DescriptorType Type : 8; // +0x0
 		u16 Length; // +0x1
-	} OptionalDescriptors[]; // +0x6 (a number of optional descriptors up to DescriptorCount)
-};
+	} __attribute__ ((__packed__)) OptionalDescriptors[]; // +0x6 (a number of optional descriptors up to DescriptorCount)
+} __attribute__ ((__packed__));
 
 /**
 	\brief The possible types of hid reports.

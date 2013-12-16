@@ -48,6 +48,6 @@ struct UsbDeviceRequest {
 	u16 Value; // +0x2
 	u16 Index; // +0x4
 	u16 Length; // +0x6
-};
+} __attribute__ ((__packed__));
 
 #endif // _DEVICEREQUEST_H

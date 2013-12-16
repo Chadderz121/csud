@@ -25,7 +25,7 @@ struct KeyboardModifiers {
 	bool RightShift : 1; // @5
 	bool RightAlt : 1; // 'alt gr' @6
 	bool RightGui : 1; // @7
-};
+} __attribute__ ((__packed__));
 
 /** 
 	\brief The current state of keyboard leds.
@@ -42,7 +42,7 @@ struct KeyboardLeds {
 	bool Power : 1;
 	bool Mute : 1;
 	bool Shift : 1;
-};
+} __attribute__ ((__packed__));
 
 /** The DeviceDriver field in UsbDriverDataHeader for keyboard devices. */
 #define DeviceDriverKeyboard 0x4B424430

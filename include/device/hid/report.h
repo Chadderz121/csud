@@ -50,7 +50,7 @@ struct HidReportItem {
 		TagLocalDelimiter = 0x2a,
 		TagLong = 0x3f,
 	} Tag : 6; // @2
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief A main input, output or feature in an hid report descriptor.
@@ -69,7 +69,7 @@ struct HidMainItem {
 	bool Volatile : 1; // NonVolatile=0,Volatile=1 Inputs cannot be volatile @7
 	bool BufferedBytes : 1; // BitField=0,BufferedBytes=1 @8
 	unsigned _reserved9_31 : 23; // @9
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief A main collection index in an hid report descriptor.
@@ -209,7 +209,7 @@ struct HidFullUsage {
 		enum HidUsagePageLed Led : 16;
 	};
 	enum HidUsagePage Page : 16;
-};
+} __attribute__ ((__packed__));
 
 /** 
 	\brief A HID field units declaration.
@@ -236,7 +236,7 @@ struct HidUnit {
 	signed Current : 4;
 	signed LuminousIntensity : 4;
 	unsigned _reserved28_31 : 4;
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief A parsed report field, with value.

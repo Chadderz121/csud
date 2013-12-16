@@ -31,7 +31,7 @@ struct HubDescriptor {
 		unsigned ThinkTime : 2; // in +1*8FS units @5
 		bool Indicators : 1; // @7
 		unsigned _reserved8_15 : 8; // @8
-	} Attributes; // +0x3
+	} __attribute__ ((__packed__)) Attributes; // +0x3
 	u8 PowerGoodDelay; // +0x5
 	u8 MaximumHubPower; // +0x6
 	u8 Data[]; // +0x7 the data consists of n bytes describing port detatchability, followed by n bytes for compatiblity. n = roundup(ports/8).
@@ -47,7 +47,7 @@ struct HubStatus {
 	bool LocalPower : 1; // @0
 	bool OverCurrent : 1; // @1
 	unsigned _reserved2_15 : 14; // @2
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief Encapsulates the change in current status of a hub.
@@ -59,7 +59,7 @@ struct HubStatusChange {
 	bool LocalPowerChanged : 1; // @0
 	bool OverCurrentChanged : 1; // @1
 	unsigned _reserved2_15 : 14; // @2
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief Encapsulates the full status of a hub.
@@ -69,7 +69,7 @@ struct HubStatusChange {
 struct HubFullStatus {
 	struct HubStatus Status;
 	struct HubStatusChange Change;
-};
+} __attribute__ ((__packed__));
 /**
 	\brief Encapsulates the current status of a hub port.
 
@@ -89,7 +89,7 @@ struct HubPortStatus {
 	bool TestMode : 1; // @11
 	bool IndicatorControl : 1; // @12
 	unsigned _reserved13_15 : 3; // @13
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief Encapsulates the change in current status of a hub port.
@@ -104,7 +104,7 @@ struct HubPortStatusChange {
 	bool OverCurrentChanged : 1; // @3
 	bool ResetChanged : 1; // @4
 	unsigned _reserved5_15 : 11; // @5
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief Encapsulates the full status of a hub port.
@@ -114,7 +114,7 @@ struct HubPortStatusChange {
 struct HubPortFullStatus {
 	struct HubPortStatus Status;
 	struct HubPortStatusChange Change;
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief A feature of a hub port.

@@ -124,7 +124,7 @@ struct CoreInterrupts {
 	bool Disconnect : 1; // @29
 	bool SessionRequest : 1; // @30
 	bool Wakeup : 1; // @31
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief The interrupts in the channel registers.
@@ -148,7 +148,7 @@ struct ChannelInterrupts {
 	bool ExcessiveTransmission : 1; // @12
 	bool FrameListRollover : 1; // @13
 	unsigned _reserved14_31 : 18; // @14
-};
+} __attribute__ ((__packed__));
 
 /**
 	\brief Contains the core global registers structure that control the HCD.
@@ -180,7 +180,7 @@ extern volatile struct CoreGlobalRegs {
 		volatile unsigned multvalidbc:5;
 		volatile bool chirpen:1;
 		volatile unsigned _reserved28_31:4;
-	} OtgControl; // +0x0
+	} __attribute__ ((__packed__)) OtgControl; // +0x0
 	volatile struct {
 		volatile unsigned _reserved0_1 : 2; // @0
 		volatile bool SessionEndDetected : 1; // @2
@@ -192,7 +192,7 @@ extern volatile struct CoreGlobalRegs {
 		volatile bool ADeviceTimeoutChange : 1; // @18
 		volatile bool DebounceDone : 1; // @19
 		volatile unsigned _reserved20_31 : 12; // @20
-	} OtgInterrupt; // +0x4	
+	} __attribute__ ((__packed__)) OtgInterrupt; // +0x4
 	volatile struct {
 		volatile bool InterruptEnable : 1; // @0
 #ifdef BROADCOM_2835
@@ -230,7 +230,7 @@ extern volatile struct CoreGlobalRegs {
 			Single = 1, // (default)
 		} DmaRemainderMode : 1; // @23
 		volatile unsigned _reserved24_31 : 8; // @24
-	} Ahb;	// +0x8
+	} __attribute__ ((__packed__)) Ahb;	// +0x8
 	volatile struct {
 		volatile unsigned toutcal:3; // @0
 		volatile bool PhyInterface : 1; // @3
@@ -263,7 +263,7 @@ extern volatile struct CoreGlobalRegs {
 		volatile bool force_host_mode:1; // @29
 		volatile bool force_dev_mode:1; // @30
 		volatile unsigned _reserved31:1; // @31
-	} Usb; // +0xc
+	} __attribute__ ((__packed__)) Usb; // +0xc
 	volatile struct CoreReset {
 		volatile bool CoreSoft : 1; // @0
 		volatile bool HclkSoft : 1; // @1
@@ -308,15 +308,15 @@ extern volatile struct CoreGlobalRegs {
 				ChannelHalted = 7,
 			} PacketStatus : 4; // @17
 			volatile unsigned _reserved21_31 : 11; // @21
-		} Peek; // Read Only +0x1c
+		} __attribute__ ((__packed__)) Peek; // Read Only +0x1c
 		volatile const struct ReceiveStatus Pop; // Read Only +0x20
 		volatile u32 Size; // +0x24
-	} Receive; // +0x1c
+	} __attribute__ ((__packed__)) Receive; // +0x1c
 	volatile struct {
 		volatile struct FifoSize {
 			volatile unsigned StartAddress : 16; // @0
 			volatile unsigned Depth : 16; // @16
-		} Size; // +0x28
+		} __attribute__ ((__packed__)) Size; // +0x28
 		volatile const struct {
 			volatile unsigned SpaceAvailable : 16; // @0
 			volatile unsigned QueueSpaceAvailable : 8; // @16
@@ -329,8 +329,8 @@ extern volatile struct CoreGlobalRegs {
 			} TokenType : 2; // @25
 			volatile unsigned Channel : 4; // @27
 			volatile unsigned Odd : 1; // @31
-		} Status; // Read Only +0x2c
-	} NonPeriodicFifo; // +0x28
+		} __attribute__ ((__packed__)) Status; // Read Only +0x2c
+	} __attribute__ ((__packed__)) NonPeriodicFifo; // +0x28
 	volatile struct {
 		unsigned ReadWriteData : 8; // @0
 		unsigned RegisterAddress : 8; // @8
@@ -342,7 +342,7 @@ extern volatile struct CoreGlobalRegs {
 		unsigned _reserved28_29 : 2; // @28
 		bool ReadWrite : 1; // @30
 		bool bsydne : 1; // @31
-	} I2cControl; // +0x30
+	} __attribute__ ((__packed__)) I2cControl; // +0x30
 	volatile u32 PhyVendorControl; // +0x34
 	volatile u32 Gpio; // +0x38
 	volatile u32 UserId; // +0x3c
@@ -433,7 +433,7 @@ extern volatile struct CoreGlobalRegs {
 		volatile const unsigned InEndpointCount : 4; // @122
 		volatile const bool DmaDescription : 1; // @126
 		volatile const bool DmaDynamicDescription : 1; // @127
-	} Hardware; // All read only +0x44
+	} __attribute__ ((__packed__)) Hardware; // All read only +0x44
 	volatile struct {
 		volatile bool LowPowerModeCapable : 1; // @0
 		volatile bool ApplicationResponse : 1; // @1
@@ -451,7 +451,7 @@ extern volatile struct CoreGlobalRegs {
 		volatile unsigned _reserved28_29 : 2; // @28
 		volatile bool HsicConnect : 1; // @30
 		volatile bool InverseSelectHsic : 1; // @31
-	} LowPowerModeConfiguration; // +0x54
+	} __attribute__ ((__packed__)) LowPowerModeConfiguration; // +0x54
 	volatile const u8 _reserved58_80[0x80 - 0x58]; // No read or write +0x58
 #ifdef BROADCOM_2835
 	volatile struct {
@@ -463,7 +463,7 @@ extern volatile struct CoreGlobalRegs {
 		volatile bool MdoWrite : 1; // @23
 		volatile unsigned _reserved24_30 : 7; // @24
 		volatile const bool Busy : 1; // @31
-	} MdioControl; // +0x80
+	} __attribute__ ((__packed__)) MdioControl; // +0x80
 	volatile union {
 		volatile const u32 MdioRead; // Read Only +0x84
 		volatile u32 MdioWrite; // +0x84
@@ -482,7 +482,7 @@ extern volatile struct CoreGlobalRegs {
 		volatile unsigned _reserved10_15 : 6; // @10
 		volatile unsigned AxiPriorityLevel : 4; // @16
 		volatile unsigned _reserved20_31 : 12; // @20
-	} MiscControl; // +0x88
+	} __attribute__ ((__packed__)) MiscControl; // +0x88
 #else
 	volatile u32 _reserved80_8c[3]; // +0x80
 #endif
@@ -490,9 +490,9 @@ extern volatile struct CoreGlobalRegs {
 	volatile struct {
 		volatile struct FifoSize HostSize; // +0x100
 		volatile struct FifoSize DataSize[15]; // +0x104
-	} PeriodicFifo; // +0x100
+	} __attribute__ ((__packed__)) PeriodicFifo; // +0x100
 	volatile u8 _reserved140_400[0x400-0x140]; // +0x140
-} *CorePhysical, *Core;
+} __attribute__ ((__packed__)) *CorePhysical, *Core;
 
 /**
 	\brief Contains the host mode global registers structure that control the HCD.
@@ -518,16 +518,16 @@ extern volatile struct HostGlobalRegs {
 		volatile const bool PeriodicScheduleStatus : 1; // @27
 		volatile unsigned reserved28_30 : 3; // @28
 		volatile bool mode_chg_time:1; // @31
-	} Config; // +0x400
+	} __attribute__ ((__packed__)) Config; // +0x400
 	volatile struct {
 		volatile unsigned Interval : 16; // @0
 		volatile bool DynamicFrameReload : 1; // @16
 		volatile unsigned _reserved17_31 : 15; // @17
-	} FrameInterval; // +0x404
+	} __attribute__ ((__packed__)) FrameInterval; // +0x404
 	volatile struct {
 		volatile unsigned FrameNumber : 16; // @0
 		volatile unsigned FrameRemaining : 16; // @16
-	} FrameNumber; // +0x408
+	} __attribute__ ((__packed__)) FrameNumber; // +0x408
 	volatile u32 _reserved40c; // + 0x40c
 	volatile struct {
 		volatile unsigned SpaceAvailable : 16; // @0
@@ -540,7 +540,7 @@ extern volatile struct HostGlobalRegs {
 		} TokenType : 2; // @25
 		volatile unsigned Channel : 4; // @27
 		volatile unsigned Odd : 1; // @31
-	} FifoStatus; // +0x410
+	} __attribute__ ((__packed__)) FifoStatus; // +0x410
 	volatile u32 Interrupt; // +0x414
 	volatile u32 InterruptMask; // +0x418
 	volatile u32 FrameList; // +0x41c
@@ -561,7 +561,7 @@ extern volatile struct HostGlobalRegs {
 		volatile unsigned TestControl : 4; // @13
 		volatile UsbSpeed Speed : 2; // @17
 		volatile unsigned _reserved19_31 : 13; // @19
-	} Port; // +0x440
+	} __attribute__ ((__packed__)) Port; // +0x440
 	volatile u8 _reserved444_500[0x500 - 0x444]; // +0x444
 	volatile struct HostChannel {
 		volatile struct HostChannelCharacteristic {
@@ -576,7 +576,7 @@ extern volatile struct HostGlobalRegs {
 			volatile unsigned OddFrame  : 1; // @29
 			volatile bool Disable : 1; // @30
 			volatile bool Enable : 1; // @31
-		} Characteristic; // +0x0
+		} __attribute__ ((__packed__)) Characteristic; // +0x0
 		volatile struct {
 			volatile unsigned PortAddress : 7; // @0
 			volatile unsigned HubAddress : 7; // @7
@@ -589,7 +589,7 @@ extern volatile struct HostGlobalRegs {
 			volatile bool CompleteSplit : 1; // @16
 			volatile unsigned _reserved17_30 : 14; // @17
 			volatile bool SplitEnable : 1; // @31
-		} SplitControl; // +0x4
+		} __attribute__ ((__packed__)) SplitControl; // +0x4
 		volatile struct ChannelInterrupts Interrupt; // +0x8
 		volatile struct ChannelInterrupts InterruptMask; // +0xc
 		volatile struct {
@@ -603,13 +603,13 @@ extern volatile struct HostGlobalRegs {
 				Setup = 3,
 			} PacketId : 2; // @29
 			volatile bool DoPing : 1; // @31
-		} TransferSize; // +0x10
+		} __attribute__ ((__packed__)) TransferSize; // +0x10
 		volatile void* DmaAddress;  // +0x14
 		volatile u32 _reserved18; // +0x18
 		volatile u32 _reserved1c; // +0x1c
-	} Channel[ChannelCount]; // +0x500
+	} __attribute__ ((__packed__)) Channel[ChannelCount]; // +0x500
 	volatile u8 _reserved700_800[0x800 - 0x700]; // +0x700
-} *HostPhysical, *Host;
+} __attribute__ ((__packed__)) *HostPhysical, *Host;
 
 /**
 	\brief Contains the dwc power and clock gating controls.
@@ -627,7 +627,7 @@ extern volatile struct PowerReg {
 	volatile bool PhySleeping : 1; // @6
 	volatile bool DeepSleep : 1; // @7
 	volatile unsigned _reserved8_31 : 24; // @8
-} *PowerPhysical, *Power;
+} __attribute__ ((__packed__)) *PowerPhysical, *Power;
 
 /** 
 	\brief Indicates if the Phy has been initialised.

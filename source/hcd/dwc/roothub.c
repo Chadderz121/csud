@@ -41,7 +41,7 @@ struct {
 	struct UsbConfigurationDescriptor Configuration;
 	struct UsbInterfaceDescriptor Interface;
 	struct UsbEndpointDescriptor Endpoint;
-} __attribute__((packed)) ConfigurationDescriptor = {
+} __attribute__ ((__packed__)) ConfigurationDescriptor = {
 	.Configuration = {
 		.DescriptorLength = 9,
 		.DescriptorType = Configuration,
