@@ -5,13 +5,18 @@
 *	A light weight implementation of the USB protocol stack fit for a simple
 *	driver.
 *
-*	hcd/dwc/designware.h contains definitions pertaining to the DesignWare® 
+*	hcd/dwc/designware.h contains definitions pertaining to the DesignWareÂ® 
 *	Hi-Speed USB 2.0 On-The-Go (HS OTG) Controller.
 *
 *	THIS SOFTWARE IS NOT AFFILIATED WITH NOR ENDORSED BY SYNOPSYS IP.
 ******************************************************************************/
 #ifndef _HCD_DWC_DESIGNWARE_H
 #define _HCD_DWC_DESIGNWARE_H
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 #include <platform/platform.h>
 
@@ -26,7 +31,7 @@
 /**
 	\brief The addresses of all core registers used by the HCD.
 
-	The address offsets of all core registers used by the DesignWare® Hi-Speed 
+	The address offsets of all core registers used by the DesignWareÂ® Hi-Speed 
 	USB 2.0 On-The-Go (HS OTG) Controller. Used in write and read throughs.
 */
 enum CoreRegisters {
@@ -63,7 +68,7 @@ enum CoreRegisters {
 /**
 	\brief The addresses of all core registers used by the HCD.
 
-	The address offsets of all host registers used by the DesignWare® Hi-Speed 
+	The address offsets of all host registers used by the DesignWareÂ® Hi-Speed 
 	USB 2.0 On-The-Go (HS OTG) Controller. Used in write and read throughs.
 */
 enum HostRegisters {
@@ -88,7 +93,7 @@ enum HostRegisters {
 /**
 	\brief The interrupts in the core register.
 
-	Contains the core interrutps that controls the DesignWare® Hi-Speed USB 2.0
+	Contains the core interrutps that controls the DesignWareÂ® Hi-Speed USB 2.0
 	On-The-Go (HS OTG) Controller.
 */
 struct CoreInterrupts {
@@ -129,7 +134,7 @@ struct CoreInterrupts {
 /**
 	\brief The interrupts in the channel registers.
 
-	Contains the interrupts that controls the channels of the DesignWare® 
+	Contains the interrupts that controls the channels of the DesignWareÂ® 
 	Hi-Speed USB 2.0 On-The-Go (HS OTG) Controller.
 */
 struct ChannelInterrupts {
@@ -153,7 +158,7 @@ struct ChannelInterrupts {
 /**
 	\brief Contains the core global registers structure that control the HCD.
 
-	Contains the core global registers structure that controls the DesignWare®
+	Contains the core global registers structure that controls the DesignWareÂ®
 	Hi-Speed USB 2.0 On-The-Go (HS OTG) Controller.
 */
 extern volatile struct CoreGlobalRegs {
@@ -497,7 +502,7 @@ extern volatile struct CoreGlobalRegs {
 /**
 	\brief Contains the host mode global registers structure that control the HCD.
 
-	Contains the host mode global registers structure that controls the DesignWare®
+	Contains the host mode global registers structure that controls the DesignWareÂ®
 	Hi-Speed USB 2.0 On-The-Go (HS OTG) Controller.
 */
 extern volatile struct HostGlobalRegs {
@@ -614,7 +619,7 @@ extern volatile struct HostGlobalRegs {
 /**
 	\brief Contains the dwc power and clock gating controls.
 
-	Contains the dwc power and clock gating structure that controls the DesignWare®
+	Contains the dwc power and clock gating structure that controls the DesignWareÂ®
 	Hi-Speed USB 2.0 On-The-Go (HS OTG) Controller.
 */
 extern volatile struct PowerReg {
@@ -702,5 +707,9 @@ void ClearReg(volatile const void* reg);
 void SetReg(volatile const void* reg);
 
 #endif // HCD_DESIGNWARE_20
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _HCD_DWC_DESIGNWARE_H

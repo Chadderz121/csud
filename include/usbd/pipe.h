@@ -13,6 +13,11 @@
 #ifndef _USBD_PIPE_H
 #define _USBD_PIPE_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <types.h>
 
 /**
@@ -36,5 +41,10 @@ struct UsbPipeAddress {
 	UsbDirection Direction : 1; // @18
 	unsigned _reserved19_31 : 13; // @19
 } __attribute__ ((__packed__));
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _USBD_PIPE_H

@@ -7,6 +7,15 @@
 *
 *	device/hid/mouse.h contains definitions relating to mouses.
 ******************************************************************************/
+
+#ifndef MOUSE_H_
+#define MOUSE_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <usbd/device.h>
 #include <types.h>
 
@@ -115,3 +124,10 @@ u8 MouseGetButtons(u32 mouseAddress);
 	successfully received report.
 */
 bool MouseGetButtonIsPressed(u32 mouseAddress, enum MouseDeviceButton button);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

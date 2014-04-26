@@ -7,6 +7,15 @@
 *
 *	device/hub.h contains definitions relating to the USB hub device.
 ******************************************************************************/
+
+#ifndef HUB_H_
+#define HUB_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <usbd/descriptors.h>
 #include <usbd/device.h>
 #include <types.h>
@@ -195,3 +204,9 @@ Result HubCheckConnection(struct UsbDevice *device, u8 port);
 	devices being removed.
 */
 void HubRecursiveCheck(struct UsbDevice *device);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

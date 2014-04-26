@@ -9,6 +9,15 @@
 *	the USB implementation.
 ******************************************************************************/
 
+#ifndef HCD_H_
+#define HCD_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include <usbd/device.h>
 #include <usbd/devicerequest.h>
 #include <usbd/pipe.h>
@@ -65,3 +74,9 @@ Result HcdSumbitControlMessage(struct UsbDevice *device,
 	struct UsbDeviceRequest *request);
 
 #include "dwc/designware20.h"
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

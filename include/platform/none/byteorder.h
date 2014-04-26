@@ -11,6 +11,11 @@
 #include <configuration.h>
 #include <types.h>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #if defined ENDIAN_BIG
 /**
 	Converts a number from the machine's byte order to big endian or back.
@@ -47,4 +52,8 @@
 #define EndianLittleHalf(x) x
 #else
 #error Endianness not specified.
+#endif
+
+#ifdef __cplusplus
+}
 #endif
