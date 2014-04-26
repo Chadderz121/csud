@@ -11,6 +11,11 @@
 #ifndef _USBD_DESCRIPTORS_H
 #define _USBD_DESCRIPTORS_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <types.h>
 
 /**
@@ -50,18 +55,19 @@ struct UsbDescriptorHeader {
 
 	The device descriptor sturcture defined in the USB 2.0 manual in 9.6.1.
 */
+enum DeviceClass {
+  DeviceClassInInterface = 0x00,
+  DeviceClassCommunications = 0x2,
+  DeviceClassHub = 0x9,
+  DeviceClassDiagnostic = 0xdc,
+  DeviceClassMiscellaneous = 0xef,
+  DeviceClassVendorSpecific = 0xff,
+};
 struct UsbDeviceDescriptor {
 	u8 DescriptorLength; // +0x0
 	enum DescriptorType DescriptorType : 8; // +0x1
 	u16 UsbVersion; // (in BCD 0x210 = USB2.10) +0x2
-	enum DeviceClass {
-		DeviceClassInInterface = 0x00,
-		DeviceClassCommunications = 0x2,
-		DeviceClassHub = 0x9,
-		DeviceClassDiagnostic = 0xdc,
-		DeviceClassMiscellaneous = 0xef,
-		DeviceClassVendorSpecific = 0xff,
-	} Class : 8; // +0x4
+	enum DeviceClass Class : 8; // +0x4
 	u8 SubClass; // +0x5
 	u8 Protocol; // +0x6
 	u8 MaxPacketSize0; // +0x7
@@ -229,5 +235,9 @@ struct UsbStringDescriptor {
 	enum DescriptorType DescriptorType : 8; // +0x1
 	u16 Data[]; // +0x2 amount varies
 } __attribute__ ((__packed__));
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _USBD_DESCRIPTORS_H

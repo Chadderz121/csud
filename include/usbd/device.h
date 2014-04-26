@@ -11,6 +11,11 @@
 #ifndef _DEVICE_H
 #define _DEVICE_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <usbd/descriptors.h>
 #include <types.h>
 
@@ -145,5 +150,9 @@ struct UsbDevice {
 	array is populated by ConfigurationLoad().
 */
 extern Result (*InterfaceClassAttach[InterfaceClassAttachCount])(struct UsbDevice *device, u32 interfaceNumber);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _DEVICE_H

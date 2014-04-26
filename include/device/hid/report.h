@@ -9,7 +9,16 @@
 *	device reports, used to communicate the functionality of any given hid 
 *	device.
 ******************************************************************************/
+
+#ifndef REPORT_H_
+#define REPORT_H_
+
 #include <types.h>
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 /**
 	\brief An item in an hid report descriptor.
@@ -94,6 +103,7 @@ enum HidMainCollection {
 	in section 3 table 1 of the HID 1.11 usage tables.
 */
 enum HidUsagePage {
+	Undefined = 0,
 	GenericDesktopControl = 1,
 	SimulationControl = 2,
 	VrControl = 3,
@@ -330,3 +340,10 @@ struct HidParserResult {
 	Reads the current value at a given index in a HID field.
 */
 s32 HidGetFieldValue(struct HidParserField *field, u32 index);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

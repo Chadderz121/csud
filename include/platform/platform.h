@@ -12,6 +12,11 @@
 #ifndef _PLATFORM_H
 #define _PLATFORM_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <configuration.h>
 #include <types.h>
 
@@ -65,7 +70,7 @@ void MemoryCopy(void* destination, void* source, u32 length);
 	Notifies the parent system of progress loading the driver. Messages may be 
 	displayed to a semi-technically competant user.
 */
-void LogPrint(char* message, u32 messageLength);
+void LogPrint(const char* message, u32 messageLength);
 /**
 	\brief Notifies the user of progress. 
 
@@ -125,5 +130,9 @@ void MicroDelay(u32 delay);
 #else
 #error Unrecognised Processor Family
 #endif // ARM
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

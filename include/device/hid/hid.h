@@ -8,6 +8,15 @@
 *	device/hid/hid.h contains definitions relating to generic human interface 
 *	devices. Information about the hid reports is in device/hid/report.h.
 ******************************************************************************/
+
+#ifndef HID_H_
+#define HID_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <types.h>
 #include <usbd/device.h>
 
@@ -147,3 +156,9 @@ Result HidReadDevice(struct UsbDevice *device, u8 report);
 	its hid and report descriptors to see what it can do.
 */
 Result HidAttach(struct UsbDevice *device, u32 interfaceNumber);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif HID_H_

@@ -7,6 +7,16 @@
 *
 *	device/hid/keyboard.h contains definitions relating to keyboards.
 ******************************************************************************/
+
+#ifndef KEYBOARD_H_
+#define KEYBOARD_H_
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 #include <usbd/device.h>
 #include <types.h>
 
@@ -157,3 +167,10 @@ u16 KeyboardGetKeyDown(u32 keyboardAddress, u32 index);
 	retrieves the nth item from that array. Returns 0 on error.
 */
 u32 KeyboardGetAddress(u32 index);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
