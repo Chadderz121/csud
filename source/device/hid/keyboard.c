@@ -104,9 +104,9 @@ Result KeyboardAttach(struct UsbDevice *device, u32 interface) {
 	}
 
 	parse = hidData->ParserResult;
-	if (parse->Application.Page != GenericDesktopControl ||
+	if ((parse->Application.Page != GenericDesktopControl && parse->Application.Page != Undefined) ||
 		parse->Application.Desktop != DesktopKeyboard) {
-		LOGF("KBD: %s doesn't seem to be a keyboard...\n", UsbGetDescription(device));
+		LOGF("KBD: %s doesn't seem to be a keyboard (%x != %x || %x != %x)...\n", UsbGetDescription(device), parse->Application.Page, GenericDesktopControl, parse->Application.Desktop, DesktopKeyboard);
 		return ErrorIncompatible;
 	}
 	if (parse->ReportCount < 1) {
@@ -152,12 +152,13 @@ Result KeyboardAttach(struct UsbDevice *device, u32 interface) {
 	data->KeyReport = NULL;
 
 	for (u32 i = 0; i < parse->ReportCount; i++) {
+    LOG_DEBUGF("KBD: type %x report %d. %d fields.\n", parse->Report[i]->Type, i, parse->Report[i]->FieldCount);
 		if (parse->Report[i]->Type == Input && 
 			data->KeyReport == NULL) {
 			LOG_DEBUGF("KBD: Output report %d. %d fields.\n", i, parse->Report[i]->FieldCount);
 			data->KeyReport = parse->Report[i];
 			for (u32 j = 0; j < parse->Report[i]->FieldCount; j++) {
-				if (parse->Report[i]->Fields[j].Usage.Page == KeyboardControl) {
+				if (parse->Report[i]->Fields[j].Usage.Page == KeyboardControl || parse->Report[i]->Fields[j].Usage.Page == Undefined) {
 					if (parse->Report[i]->Fields[j].Attributes.Variable) {
 						if (parse->Report[i]->Fields[j].Usage.Keyboard >= KeyboardLeftControl
 							&& parse->Report[i]->Fields[j].Usage.Keyboard <= KeyboardRightGui)

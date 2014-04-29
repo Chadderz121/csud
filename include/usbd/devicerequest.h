@@ -11,6 +11,11 @@
 #ifndef _DEVICEREQUEST_H
 #define _DEVICEREQUEST_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include <types.h>
 
 /**
@@ -49,5 +54,10 @@ struct UsbDeviceRequest {
 	u16 Index; // +0x4
 	u16 Length; // +0x6
 } __attribute__ ((__packed__));
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _DEVICEREQUEST_H

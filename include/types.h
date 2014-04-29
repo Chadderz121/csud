@@ -7,8 +7,13 @@
 *
 *	types.h contains definitions of standardised types used ubiquitously.
 ******************************************************************************/
+
 #ifndef _TYPES_H
 #define _TYPES_H
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 /** Unsigned 8 bit type */
 typedef unsigned	char		u8;
@@ -28,10 +33,12 @@ typedef signed		int			s32;
 typedef signed		long long	s64;
 
 /** One bit truth value */
+#ifndef __cplusplus
 typedef enum {
 	false = 0,
 	true = 1,
 } bool;
+#endif
 
 /**
 	\brief Result of a method call.
@@ -138,6 +145,10 @@ static inline u32 SizeToNumber(UsbPacketSize size) {
 	else if (size == Bits32) return 32;
 	else return 64;
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 /**
 	\brief Returns the minimum of two inputs.
