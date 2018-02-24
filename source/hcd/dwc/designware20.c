@@ -247,7 +247,7 @@ Result HcdPrepareChannel(struct UsbDevice *device, u8 channel,
 
 	// Clear split control.
 	ClearReg(&Host->Channel[channel].SplitControl);
-	if (pipe->Speed != High) {
+	if ((pipe->Speed != High) && (device->Parent != NULL) && (device->Parent->Speed == High) && (device->Parent->Parent != NULL)) {
 		Host->Channel[channel].SplitControl.SplitEnable = true;
 		Host->Channel[channel].SplitControl.HubAddress = device->Parent->Number;
 		Host->Channel[channel].SplitControl.PortAddress = device->PortNumber;			
