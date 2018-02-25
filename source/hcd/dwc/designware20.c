@@ -368,33 +368,31 @@ Result HcdChannelSendWaitOne(struct UsbDevice *device,
 		ReadBackReg(&Host->Channel[channel].TransferSize);
 		
 		if (pipe->Speed != High) {
-			if (Host->Channel[channel].Interrupt.Acknowledgement) {
-				if (Host->Channel[channel].SplitControl.SplitEnable) {
-					for (tries = 0; tries < 3; tries++) {
-						SetReg(&Host->Channel[channel].Interrupt);
-						WriteThroughReg(&Host->Channel[channel].Interrupt);
+			if ((Host->Channel[channel].Interrupt.Acknowledgement) && (Host->Channel[channel].SplitControl.SplitEnable)) {
+				for (tries = 0; tries < 3; tries++) {
+					SetReg(&Host->Channel[channel].Interrupt);
+					WriteThroughReg(&Host->Channel[channel].Interrupt);
 
-						ReadBackReg(&Host->Channel[channel].SplitControl);
-						Host->Channel[channel].SplitControl.CompleteSplit = true;
-						WriteThroughReg(&Host->Channel[channel].SplitControl);
+					ReadBackReg(&Host->Channel[channel].SplitControl);
+					Host->Channel[channel].SplitControl.CompleteSplit = true;
+					WriteThroughReg(&Host->Channel[channel].SplitControl);
 					
-						Host->Channel[channel].Characteristic.Enable = true;
-						Host->Channel[channel].Characteristic.Disable = false;
-						WriteThroughReg(&Host->Channel[channel].Characteristic);
+					Host->Channel[channel].Characteristic.Enable = true;
+					Host->Channel[channel].Characteristic.Disable = false;
+					WriteThroughReg(&Host->Channel[channel].Characteristic);
 
-						timeout = 0;
-						do {
-							if (timeout++ == RequestTimeout) {
-								LOGF("HCD: Request split completion to %s has timed out.\n", UsbGetDescription(device));
-								device->Error = ConnectionError;
-								return ErrorTimeout;
-							}
-							ReadBackReg(&Host->Channel[channel].Interrupt);
-							if (!Host->Channel[channel].Interrupt.Halt) MicroDelay(100);
-							else break;
-						} while (true);
-						if (!Host->Channel[channel].Interrupt.NotYet) break;
-					}
+					timeout = 0;
+					do {
+						if (timeout++ == RequestTimeout) {
+							LOGF("HCD: Request split completion to %s has timed out.\n", UsbGetDescription(device));
+							device->Error = ConnectionError;
+							return ErrorTimeout;
+						}
+						ReadBackReg(&Host->Channel[channel].Interrupt);
+						if (!Host->Channel[channel].Interrupt.Halt) MicroDelay(100);
+						else break;
+					} while (true);
+					if (!Host->Channel[channel].Interrupt.NotYet) break;
 				}
 
 				if (tries == 3) {
