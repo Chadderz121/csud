@@ -393,8 +393,10 @@ Result HubCheckConnection(struct UsbDevice *device, u8 port) {
 		return result;
 	}
 	portStatus = &data->PortStatus[port];
-	if (prevConnected != portStatus->Status.Connected) {
-		portStatus->Change.ConnectedChanged = true;
+	if (device == UsbGetRootHub()) {
+		if (prevConnected != portStatus->Status.Connected) {
+			portStatus->Change.ConnectedChanged = true;
+		}
 	}
 
 	if (portStatus->Change.ConnectedChanged) {
