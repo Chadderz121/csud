@@ -382,8 +382,10 @@ Result HubCheckConnection(struct UsbDevice *device, u8 port) {
 	Result result;
 	struct HubPortFullStatus *portStatus;
 	struct HubDevice *data;
+	int prevConnected;
 
 	data = (struct HubDevice*)device->DriverData;
+	prevConnected = data->PortStatus[port].Status.Connected;
 
 	if ((result = HubPortGetStatus(device, port)) != OK) {
 		if (result != ErrorDisconnected)
@@ -391,7 +393,12 @@ Result HubCheckConnection(struct UsbDevice *device, u8 port) {
 		return result;
 	}
 	portStatus = &data->PortStatus[port];
-	
+	if (device == UsbGetRootHub()) {
+		if (prevConnected != portStatus->Status.Connected) {
+			portStatus->Change.ConnectedChanged = true;
+		}
+	}
+
 	if (portStatus->Change.ConnectedChanged) {
 		HubPortConnectionChanged(device, port);
 	}
