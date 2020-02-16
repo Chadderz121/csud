@@ -33,7 +33,7 @@ typedef signed		int			s32;
 typedef signed		long long	s64;
 
 /** One bit truth value */
-#ifndef __cplusplus
+#if !defined __cplusplus && !defined bool
 typedef enum {
 	false = 0,
 	true = 1,
